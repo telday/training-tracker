@@ -67,6 +67,7 @@ function Card(props){
                 props.category &&
                 <p className="card-category">{props.category}</p>
             }
+            {props.header}
         </div>
         <div className="card-body">
             {props.children}
@@ -75,8 +76,8 @@ function Card(props){
 }
 
 function GraphCard(props){
-    return <Card title="test" >
-        <canvas id={props.id} style=`width: ${};height: ${}`></canvas>
+    return <Card title="test" header={<ExerciseSelector />}>
+        <canvas id={props.id} style={width: "300px", height: "200px"}></canvas>
     </Card>
 }
 

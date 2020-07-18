@@ -86,7 +86,8 @@ function Card(props) {
                 'p',
                 { className: 'card-category' },
                 props.category
-            )
+            ),
+            props.header
         ),
         React.createElement(
             'div',
@@ -99,8 +100,8 @@ function Card(props) {
 function GraphCard(props) {
     return React.createElement(
         Card,
-        { title: 'test' },
-        'test'
+        { title: 'test', header: React.createElement(ExerciseSelector, null) },
+        React.createElement('canvas', { id: props.id })
     );
 }
 
