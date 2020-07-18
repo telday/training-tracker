@@ -21,29 +21,51 @@ function initializeHistoryChart(){
 }
 
 function getExerciseInfo(){
-    $.get('/api/exercises', (data) => {
-        return data.exercises;
+    var prom = $.get('/api/exercises', (data) => {
+        console.log(data);
+        var k = data.exercises;
     });
+    return prom;
 }
 
 class ExerciseSelector extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            selected: 'test'
-        };
     }
 
-    handleClick(){
-        const selected = 'a';
-        this.setState({selected: selected});
+    handleClick(i){
+        return;
     }
 
     render(){
-        return React.createElement('button', {
-            className: 'btn btn-light',
-            onClick: () => this.handleClick(),
-        }, this.state.selected);
+        let childArray = Array();
+        childArray.push(React.createElement('div', {
+                    className: 'btn btn-secondary dropdown-toggle',
+                    type: 'button',
+                    'data-toggle': 'dropdown',
+                    'aria-haspopup': true,
+                    'aria-expanded': false,
+                    key: 'dropdownMenuButton'
+                },
+                'Dropdown toggle'
+            )
+        );
+
+        getExerciseInfo().done((data) => {
+            let exercises = data;
+        });
+        for (let i = 0; i < exercises.length; i++){
+            let el = React.createElement('div', {
+                    className: 'dropdown-item',
+                    'aria-labelledBy': 'dropdown'
+                },
+                exercises[i]
+            );
+            childArray.push(el);
+        }
+        return React.createElement('div', {
+            className: 'dropdown',
+        }, childArray);
     }
 }
 
