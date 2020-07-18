@@ -18,11 +18,39 @@ function initializeHistoryChart(){
         });
     });
 
+}
+
+function getExerciseInfo(){
     $.get('/api/exercises', (data) => {
-        console.log(data);
+        return data.exercises;
     });
+}
+
+class ExerciseSelector extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            selected: 'test'
+        };
+    }
+
+    handleClick(){
+        const selected = 'a';
+        this.setState({selected: selected});
+    }
+
+    render(){
+        return React.createElement('button', {
+            className: 'btn btn-light',
+            onClick: () => this.handleClick(),
+        }, this.state.selected);
+    }
 }
 
 window.onload = () => {
     initializeHistoryChart();
+    ReactDOM.render(
+        React.createElement(ExerciseSelector, null),
+        document.getElementById('placeholder')
+    );
 };
